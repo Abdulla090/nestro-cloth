@@ -1,10 +1,15 @@
 // Gemini API integration for clothing analysis
 import { OutfitSuggestion, ClothingItem } from "@/types/clothing";
 
-// API key for Gemini 
-const GEMINI_API_KEY = "AIzaSyDJ8UwKPZIQTtlch770SUxTm3AsIB8WSow";
+// API key for Gemini - loaded from environment variables
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 // Updated from gemini-pro-vision to gemini-1.5-flash
 const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+
+// Check if API key is configured
+if (!GEMINI_API_KEY) {
+  console.error('VITE_GEMINI_API_KEY is not configured. Please set up your environment variables.');
+}
 
 interface GeminiResponse {
   candidates: Array<{

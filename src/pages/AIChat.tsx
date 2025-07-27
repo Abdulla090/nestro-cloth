@@ -29,8 +29,13 @@ interface ChatMessage {
   clothingMentions?: ClothingItem[];
 }
 
-const GEMINI_API_KEY = "AIzaSyDJ8UwKPZIQTtlch770SUxTm3AsIB8WSow";
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
+
+// Check if API key is configured
+if (!GEMINI_API_KEY) {
+  console.error('VITE_GEMINI_API_KEY is not configured. Please set up your environment variables.');
+}
 
 const AIChat = () => {
   const { toast } = useToast();
